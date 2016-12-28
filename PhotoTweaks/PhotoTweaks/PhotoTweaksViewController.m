@@ -47,8 +47,16 @@
 
 - (void)setupSubviews
 {
+    self.view.backgroundColor = self.backgroundColor;
+
     self.photoView = [[PhotoTweakView alloc] initWithFrame:self.view.bounds image:self.image maxRotationAngle:self.maxRotationAngle];
     self.photoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.photoView.resetBtn.titleLabel.font = self.resetButtonTitleFont ?: [UIFont systemFontOfSize:17];
+    [self.photoView.resetBtn setTitleColor:self.resetButtonTitleColor forState:UIControlStateNormal];
+    self.photoView.slider.trackHeight = 3;
+    self.photoView.slider.minimumTrackTintColor = self.sliderTintColor;
+    self.photoView.slider.thumbTintColor = [UIColor blackColor];
+    self.photoView.slider.maximumTrackTintColor = [UIColor blackColor];
     [self.view addSubview:self.photoView];
     
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -61,7 +69,7 @@
     UIColor *cancelHighlightTitleColor = !self.cancelButtonHighlightTitleColor ?
     [UIColor cancelButtonHighlightedColor] : self.cancelButtonHighlightTitleColor;
     [cancelBtn setTitleColor:cancelHighlightTitleColor forState:UIControlStateHighlighted];
-    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:17];
+    cancelBtn.titleLabel.font = self.cancelButtonTitleFont ?: [UIFont systemFontOfSize:17];
     [cancelBtn addTarget:self action:@selector(cancelBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelBtn];
     
@@ -76,7 +84,7 @@
     UIColor *saveButtonHighlightTitleColor = !self.saveButtonHighlightTitleColor ?
     [UIColor saveButtonHighlightedColor] : self.saveButtonHighlightTitleColor;
     [cropBtn setTitleColor:saveButtonHighlightTitleColor forState:UIControlStateHighlighted];
-    cropBtn.titleLabel.font = [UIFont systemFontOfSize:17];
+    cropBtn.titleLabel.font = self.saveButtonTitleFont ?: [UIFont systemFontOfSize:17];
     [cropBtn addTarget:self action:@selector(saveBtnTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cropBtn];
 }

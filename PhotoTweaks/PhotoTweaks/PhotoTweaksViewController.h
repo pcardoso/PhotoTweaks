@@ -60,6 +60,7 @@
  */
 @property (nonatomic, strong) UIColor *resetButtonTitleColor;
 
+
 /**
  Reset action button's highlight title color
  */
@@ -69,6 +70,11 @@
  Slider tint color
  */
 @property (nonatomic, strong) UIColor *sliderTintColor;
+
+@property (nonatomic, strong) UIColor *backgroundColor;
+@property (nonatomic, strong) UIFont *saveButtonTitleFont;
+@property (nonatomic, strong) UIFont *cancelButtonTitleFont;
+@property (nonatomic, strong) UIFont *resetButtonTitleFont;
 
 /**
  Creates a photo tweaks view controller with the image to process.
