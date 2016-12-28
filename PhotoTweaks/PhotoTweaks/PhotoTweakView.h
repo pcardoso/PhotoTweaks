@@ -12,6 +12,10 @@ extern const CGFloat kMaxRotationAngle;
 
 @class CropView;
 
+@interface Slider : UISlider
+@property (assign) NSUInteger trackHeight;
+@end
+
 @interface PhotoContentView : UIView
 
 @property (strong, nonatomic) UIImageView *imageView;
@@ -36,7 +40,7 @@ extern const CGFloat kMaxRotationAngle;
 
 @property (nonatomic, strong, readonly) CropView *cropView;
 @property (nonatomic, strong, readonly) PhotoContentView *photoContentView;
-@property (nonatomic, strong, readonly) UISlider *slider;
+@property (nonatomic, strong, readonly) Slider *slider;
 @property (nonatomic, strong, readonly) UIButton *resetBtn;
 
 

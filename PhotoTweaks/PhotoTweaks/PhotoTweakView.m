@@ -10,6 +10,14 @@
 #import "UIColor+Tweak.h"
 #import <math.h>
 
+@implementation Slider
+- (CGRect)trackRectForBounds:(CGRect)bounds {
+    CGRect rect = [super trackRectForBounds:bounds];
+    rect.size.height = self.trackHeight;
+    return rect;
+}
+@end
+
 const CGFloat kMaxRotationAngle = 0.5;
 static const NSUInteger kCropLines = 2;
 static const NSUInteger kGridLines = 9;
@@ -433,7 +441,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
 @property (nonatomic, strong) CropView *cropView;
 
 @property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) UISlider *slider;
+@property (nonatomic, strong) Slider *slider;
 @property (nonatomic, strong) UIButton *resetBtn;
 @property (nonatomic, assign) CGSize originalSize;
 @property (nonatomic, assign) CGFloat angle;
@@ -512,7 +520,7 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         _cropView.delegate = self;
         [self addSubview:_cropView];
         
-        UIColor *maskColor = [UIColor maskColor];
+        UIColor *maskColor = [UIColor clearColor];
         _topMask = [UIView new];
         _topMask.backgroundColor = maskColor;
         [self addSubview:_topMask];
@@ -527,10 +535,10 @@ typedef NS_ENUM(NSInteger, CropCornerType) {
         [self addSubview:_rightMask];
         [self updateMasks:NO];
         
-        _slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, 260, 20)];
+        _slider = [[Slider alloc] initWithFrame:CGRectMake(0, 0, 260, 20)];
         _slider.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) - 135);
         _slider.minimumValue = -self.maxRotationAngle;
-        _slider.maximumValue = self.maxRotationAngle;
+        _slider.maximumValue = self.maxRotationAngle;        
         [_slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
         [_slider addTarget:self action:@selector(sliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_slider];
